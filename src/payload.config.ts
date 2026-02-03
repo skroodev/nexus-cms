@@ -1,6 +1,7 @@
 import path from 'path'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
@@ -55,10 +56,17 @@ export default buildConfig({
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'payload.db')}`,
+      authToken: process.env.DATABASE_AUTH_TOKEN,
     },
   }),
   plugins: [
-    // For local development, images are stored in memory
-    // In production on Vercel, Vercel Blob is used automatically for Media collection
+    uploadthingStorage({
+      collections: {
+        media: true,
+      },
+      options: {
+        token: process.env.UPLOADTHING_TOKEN,
+      },
+    }),
   ],
 })

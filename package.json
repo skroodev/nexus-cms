@@ -15,17 +15,20 @@
     "seed": "tsx src/scripts/seed.ts"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.0",
     "@payloadcms/db-sqlite": "3.74.0",
     "@payloadcms/next": "3.74.0",
     "@payloadcms/richtext-lexical": "3.74.0",
+    "@payloadcms/storage-uploadthing": "^3.74.0",
     "@payloadcms/ui": "3.74.0",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
-    "next": "15.4.11",
+    "next": "^15.5.11",
     "payload": "3.74.0",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "uploadthing": "^7.7.4"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
