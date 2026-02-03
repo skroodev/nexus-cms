@@ -6,7 +6,6 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
-import { r2Storage } from '@payloadcms/storage-r2'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -20,9 +19,9 @@ const isCLI = process.argv.some((value) => realpath(value).endsWith(path.join('p
 const isProduction = process.env.NODE_ENV === 'production'
 
 const cloudflare =
-  isCLI || !isProduction
-    ? await getCloudflareContextFromWrangler()
-    : await getCloudflareContext({ async: true })
+  isProduction
+    ? await getCloudflareContext({ async: true })
+    : await getCloudflareContextFromWrangler()
 
 export default buildConfig({
   admin: {
@@ -66,14 +65,11 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: sqliteD1Adapter({
-    binding: cloudflare.env.D1,
+    binding: isProduction ? cloudflare.env.D1 : undefined,
   }),
   plugins: [
-    // R2 storage commented out - add when you have R2 enabled on Cloudflare
-    // r2Storage({
-    //   bucket: cloudflare.env.R2 as any,
-    //   collections: { media: true },
-    // }),
+    // For local development, images are stored in memory
+    // In production on Vercel, Vercel Blob is used automatically for Media collection
   ],
 })
 
