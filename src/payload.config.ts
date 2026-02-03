@@ -70,8 +70,9 @@ export default buildConfig({
     }),
   ],
   cors: [
-    'https://nxdsgn.pages.dev',
+    'https://atelier-nexus.pages.dev',
     'https://ateliernexus.fr',
+    'https://www.ateliernexus.fr',
     process.env.FRONTEND_URL || 'http://localhost:3000',
   ].filter(Boolean) as string[],
 })
