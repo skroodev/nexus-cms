@@ -53,7 +53,9 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: sqliteAdapter({
-    url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'payload.db')}`,
+    client: {
+      url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'payload.db')}`,
+    },
   }),
   plugins: [
     // For local development, images are stored in memory
