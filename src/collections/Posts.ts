@@ -56,12 +56,12 @@ export const Posts: CollectionConfig = {
       },
       hooks: {
         beforeValidate: [
-          ({ data }) => {
-            // Always generate slug from title
-            if (data.title) {
-              data.slug = slugify(data.title)
+          ({ data, value }) => {
+            // Generate slug from title if title exists
+            if (data?.title) {
+              return slugify(data.title)
             }
-            return data
+            return value
           },
         ],
       },
