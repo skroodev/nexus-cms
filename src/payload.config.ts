@@ -69,10 +69,11 @@ export default buildConfig({
     binding: cloudflare.env.D1,
   }),
   plugins: [
-    r2Storage({
-      bucket: cloudflare.env.R2 as any,
-      collections: { media: true },
-    }),
+    // R2 storage commented out - add when you have R2 enabled on Cloudflare
+    // r2Storage({
+    //   bucket: cloudflare.env.R2 as any,
+    //   collections: { media: true },
+    // }),
   ],
 })
 
