@@ -18,7 +18,7 @@ export default async function HomePage() {
       <div className="content">
         <picture>
           <source srcSet="/images/webp/logo-nx-white.webp" />
-          <Image alt="Atelier Nexus" height={65} src="/images/webp/logo-nx-white.webp" width={65} />
+          <img alt="Atelier Nexus" height={65} src="/images/webp/logo-nx-white.webp" width={65} />
         </picture>
         {!user && <h1>Bienvenue dans votre CMS Atelier Nexus</h1>}
         {user && <h1>Bienvenue {user.email}</h1>}
